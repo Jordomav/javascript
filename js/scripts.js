@@ -152,77 +152,71 @@
 // Generate a page using only JavaScript.
 const script = document.querySelector("script");
 const body = document.querySelector("body");
-
-let newP =  document.createElement("p");
-let newH1 = document.createElement("h1");
-let newFooter = document.createElement("footer");
-let newHeader = document.createElement("header");
-let newUl = document.createElement("ul");
-let newDiv = document.createElement("div");
-
-function createLi(classArray, linkText) {
-  let newLink = document.createElement("li");
-  let newA = document.createElement("a");
-  newA.setAttribute("href", "#");
-  newA.textContent = linkText;
-  newLink.appendChild(newA);
-  for (let i = 0; i < classArray.length; i++) {
-    newLink.classList.add(classArray[i]);
-  }
-  newUl.appendChild(newLink);
-}
-createLi(["pull-left"], "Home");
-createLi(["pull-right"], "Contact");
-createLi(["pull-right"], "About");
-
-newUl.classList.add("nav", "nav-pills");
-newHeader.appendChild(newUl);
-body.insertBefore(newHeader, script);
-
-function createTextElement(elementType, text) {
-  let newElement = document.createElement(elementType);
-  newElement.textContent = text;
-  return newElement;
-}
-
-newDiv.classList.add("text-center");
-
-let h1 = createTextElement("h1", "Hello World!");
-let p = createTextElement("p", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
-newDiv.appendChild(h1);
-newDiv.appendChild(p);
-body.insertBefore(newDiv, script);
-
-let newFooterLink = document.createElement("a");
-newFooterLink.textContent = "Check me out.";
-newFooterLink.setAttribute("href", "https://www.google.com/");
-newFooterLink.setAttribute("target", "_blank");
-newFooterLink.classList.add("text-center", "footer");
-newFooter.appendChild(newFooterLink);
-body.insertBefore(newFooter, script);
-
-
-function fizzBuzz() {
+//
+// let newP =  document.createElement("p");
+// let newH1 = document.createElement("h1");
+// let newFooter = document.createElement("footer");
+// let newHeader = document.createElement("header");
+// let newUl = document.createElement("ul");
+// let newDiv = document.createElement("div");
+//
+// function createLi(classArray, linkText) {
+//   let newLink = document.createElement("li");
+//   let newA = document.createElement("a");
+//   newA.setAttribute("href", "#");
+//   newA.textContent = linkText;
+//   newLink.appendChild(newA);
+//   for (let i = 0; i < classArray.length; i++) {
+//     newLink.classList.add(classArray[i]);
+//   }
+//   newUl.appendChild(newLink);
+// }
+// createLi(["pull-left"], "Home");
+// createLi(["pull-right"], "Contact");
+// createLi(["pull-right"], "About");
+//
+// newUl.classList.add("nav", "nav-pills");
+// newHeader.appendChild(newUl);
+// body.insertBefore(newHeader, script);
+//
+// function createTextElement(elementType, text) {
+//   let newElement = document.createElement(elementType);
+//   newElement.textContent = text;
+//   return newElement;
+// }
+//
+// newDiv.classList.add("text-center");
+//
+// let h1 = createTextElement("h1", "Hello World!");
+// let p = createTextElement("p", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+// newDiv.appendChild(h1);
+// newDiv.appendChild(p);
+// body.insertBefore(newDiv, script);
+//
+// let newFooterLink = document.createElement("a");
+// newFooterLink.textContent = "Check me out.";
+// newFooterLink.setAttribute("href", "https://www.google.com/");
+// newFooterLink.setAttribute("target", "_blank");
+// newFooterLink.classList.add("text-center", "footer");
+// newFooter.appendChild(newFooterLink);
+// body.insertBefore(newFooter, script);
+//
+//
+function fizzBuzz(count, val1, val2) {
+  const val3 = val1 * val2;
   let list = document.createElement("ol");
-  for (let i = 1; i <= 100; i++) {
-    if(i % 15 == 0) {
-      console.log("FizzBuzz");
-      let res = document.createElement("li");
+  for (let i = 1; i <= count; i++) {
+    let res = document.createElement("li");
+    if(i % val3 == 0) {
       res.textContent = "FizzBuzz";
       list.appendChild(res);
-    } else if(i % 3 == 0) {
-      console.log("Fizz");
-      let res = document.createElement("li");
+    } else if(i % val1 == 0) {
       res.textContent = "Fizz";
       list.appendChild(res);
-    } else if(i % 5 == 0) {
-      console.log("Buzz");
-      let res = document.createElement("li");
+    } else if(i % val2 == 0) {
       res.textContent = "Buzz";
       list.appendChild(res);
     } else {
-      console.log(i);
-      let res = document.createElement("li");
       res.textContent = i;
       list.appendChild(res);
     }
@@ -230,7 +224,68 @@ function fizzBuzz() {
   body.insertBefore(list, script);
 }
 
-fizzBuzz();
+// fizzBuzz(50, 2, 5);
+
+// Day 8 - Forms
+// let messageForm = document.forms.messageForm;
+// let message = messageForm["msg"];
+// console.log(messageForm);
+// console.log(message);
+
+messageForm.addEventListener("submit", e => {
+  e.preventDefault();
+  let list = document.getElementById("list");
+  let newMessage = document.createElement("li");
+  let message = e.target["msg"].value;
+  newMessage.textContent = message;
+  list.appendChild(newMessage);
+  messageForm.reset();
+  // console.log(e.target["msg"].value);
+})
+
+function generateList() {
+  let fullList = [
+    'First',
+    'Second',
+    'Third',
+    'Fourth'
+  ];
+  let list = document.getElementById("list");
+  for (var i = 0; i < fullList.length; i++) {
+    let msg = document.createElement("li");
+    msg.textContent = fullList[i];
+    msg.id = `item-${i + 1}`;
+    list.appendChild(msg);
+  }
+}
+generateList();
+
+// !!!!!!!!!!THIS IS BAD!!!!!!!!!!
+// function submitForm() {
+//   console.log(document.getElementById("message").value);
+// }
+
+// var name = "Jordan";
+// var age = 22;
+// var currentClass = "JavaScript";
+// console.log(this.name);
+
+function aboutMe() {
+  let me = {
+    firstName: "Jordan",
+    lastName: "Mavrogeorge",
+    age: 22,
+    currentClass: "JavaScript",
+    fullName: function () {
+      return `${this.firstName} ${this.lastName}`
+    }
+  }
+  console.log(me.fullName());
+}
+aboutMe();
+
+
+
 
 
 
